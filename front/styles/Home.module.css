@@ -69,12 +69,15 @@
   justify-content: center;
   margin: 20px auto 0;
 }
+.item.item {
+  margin-top: 60px;
+}
 
 .mint {
   margin-top: 20px;
   cursor: pointer;
-  width: 280px;
-  height: 46px;
+  width: 200px;
+  height: 40px;
   border-radius: 30px;
   background: #dc2e66;
   font-family: "";

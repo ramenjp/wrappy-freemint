@@ -36,8 +36,8 @@ export const Template: React.FC<Props> = (props) => {
               <Image
                 src="/VERYWRAPPY_1.png"
                 alt="wrappy_1"
-                width={200}
-                height={200}
+                width={160}
+                height={160}
               />
               <button className={styles.mint}>Mint</button>
             </div>
@@ -45,8 +45,8 @@ export const Template: React.FC<Props> = (props) => {
               <Image
                 src="/VERYWRAPPY_2.png"
                 alt="wrappy_2"
-                width={200}
-                height={200}
+                width={160}
+                height={160}
               />
               <button className={styles.mint}>Mint</button>
             </div>
