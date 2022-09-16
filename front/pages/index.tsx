@@ -6,9 +6,12 @@ import { Contract } from "@ethersproject/contracts";
 import abi from "../abi.json";
 import { utils } from "ethers";
 import { ethers } from "ethers";
+import { redirect } from "next/dist/server/api-utils";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
   const { activateBrowserWallet, chainId, account, library } = useEthers();
+  const router = useRouter();
   const [mintStatus, setMintStatus] = React.useState<boolean>(false);
   const [isPolygon, setIsPolygon] = React.useState<boolean>(false);
   const contractAddress = "0xa94A7bBBe4723986268f158238d9c6b9d7a68Dc4";
@@ -29,9 +32,19 @@ const Home: NextPage = () => {
   if (chainId === 137) setIsPolygon(true);
 
   console.log("chainId :", chainId);
+
+  const connect = () => {
+    if (navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
+      router.replace(
+        "https://metamask.app.link/dapp/wrappy-freemint.vercel.app/"
+      );
+    }
+    activateBrowserWallet();
+  };
+
   return (
     <Template
-      activeWallet={activateBrowserWallet}
+      activeWallet={connect}
       account={account}
       mintStatus={mintStatus}
       mintBlack={mintBlack}
