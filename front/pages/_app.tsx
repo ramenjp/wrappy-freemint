@@ -5,6 +5,12 @@ import { Mainnet, DAppProvider, Config, Goerli } from "@usedapp/core";
 import { getDefaultProvider } from "ethers";
 import Moralis from "moralis";
 
+declare global {
+  interface Window {
+    ethereum: any;
+  }
+}
+
 function MyApp({ Component, pageProps }: AppProps) {
   const config: Config = {
     readOnlyChainId: Mainnet.chainId,
