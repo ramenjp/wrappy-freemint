@@ -34,9 +34,12 @@ const Home: NextPage = () => {
   console.log("chainId :", chainId);
 
   const connect = () => {
-    router.replace(
-      "https://metamask.app.link/dapp/wrappy-freemint.vercel.app/"
-    );
+    if (typeof window.ethereum !== "undefined") {
+      router.replace(
+        "https://metamask.app.link/dapp/wrappy-freemint.vercel.app/"
+      );
+    }
+
     activateBrowserWallet();
   };
 
