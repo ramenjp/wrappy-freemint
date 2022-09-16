@@ -5,12 +5,14 @@ import Image from "next/image";
 
 type Props = {
   activeWallet: () => void;
+  mintColorful: () => void;
+  mintBlack: () => void;
   account?: string;
-  chainId?: number;
+  mintStatus: boolean;
+  isPolygon: boolean;
 };
 
 export const Template: React.FC<Props> = (props) => {
-  console.log("chainId :", props.chainId);
   return (
     <div className={styles.container}>
       <Head>
@@ -39,7 +41,11 @@ export const Template: React.FC<Props> = (props) => {
                 width={160}
                 height={160}
               />
-              <button className={styles.mint}>Mint</button>
+              {props.isPolygon && (
+                <button className={styles.mint} onClick={props.mintBlack}>
+                  Mint
+                </button>
+              )}
             </div>
             <div className={styles.item}>
               <Image
@@ -48,7 +54,11 @@ export const Template: React.FC<Props> = (props) => {
                 width={160}
                 height={160}
               />
-              <button className={styles.mint}>Mint</button>
+              {props.isPolygon && (
+                <button className={styles.mint} onClick={props.mintColorful}>
+                  Mint
+                </button>
+              )}
             </div>
           </div>
         </>
