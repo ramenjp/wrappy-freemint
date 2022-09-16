@@ -34,11 +34,9 @@ const Home: NextPage = () => {
   console.log("chainId :", chainId);
 
   const connect = () => {
-    if (navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
-      router.replace(
-        "https://metamask.app.link/dapp/wrappy-freemint.vercel.app/"
-      );
-    }
+    router.replace(
+      "https://metamask.app.link/dapp/wrappy-freemint.vercel.app/"
+    );
     activateBrowserWallet();
   };
 
