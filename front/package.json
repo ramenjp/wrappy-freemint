@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ethersproject/contracts": "^5.7.0",
     "@moralisweb3/evm-utils": "^2.4.0",
     "@usedapp/core": "^1.1.5",
     "ethers": "^5.7.0",
