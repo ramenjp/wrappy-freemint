@@ -14,8 +14,6 @@ const Home: NextPage = () => {
   const router = useRouter();
   const [mintStatus, setMintStatus] = React.useState<boolean>(false);
   const [isPolygon, setIsPolygon] = React.useState<boolean>(true);
-  const [message, setMessage] = React.useState<string>("");
-  const [message2, setMessage2] = React.useState<string>("");
   const contractAddress = "0xa94A7bBBe4723986268f158238d9c6b9d7a68Dc4";
   const contractInterface = new utils.Interface(abi);
 
@@ -38,7 +36,6 @@ const Home: NextPage = () => {
   const connect = () => {
     const agent = window.navigator.userAgent.toLowerCase();
     if (navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
-      setMessage2("スマホです");
       const { ethereum } = window;
       if (ethereum && ethereum.isMetaMask) {
         console.log("metamask installed!");
@@ -55,18 +52,14 @@ const Home: NextPage = () => {
   };
 
   return (
-    <>
-      <div>{message}</div>
-      <div>{message2}</div>
-      <Template
-        activeWallet={connect}
-        account={account}
-        mintStatus={mintStatus}
-        mintBlack={mintBlack}
-        mintColorful={mintColorful}
-        isPolygon={isPolygon}
-      />
-    </>
+    <Template
+      account={account}
+      mintStatus={mintStatus}
+      isPolygon={isPolygon}
+      mintBlack={mintBlack}
+      mintColorful={mintColorful}
+      activeWallet={connect}
+    />
   );
 };
 

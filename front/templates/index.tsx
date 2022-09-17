@@ -32,7 +32,9 @@ export const Template: React.FC<Props> = (props) => {
         </div>
       ) : (
         <>
-          <div className={styles.title}>You can mint only 1 NFT</div>
+          <div className={styles.title}>
+            You can mint only 1 NFT (Polygon Network)
+          </div>
           <div className={styles.images}>
             <div className={styles.item}>
               <Image
