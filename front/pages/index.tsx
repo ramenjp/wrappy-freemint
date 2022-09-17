@@ -13,7 +13,8 @@ const Home: NextPage = () => {
   const { activateBrowserWallet, chainId, account, library } = useEthers();
   const router = useRouter();
   const [mintStatus, setMintStatus] = React.useState<boolean>(false);
-  const [isPolygon, setIsPolygon] = React.useState<boolean>(false);
+  const [isPolygon, setIsPolygon] = React.useState<boolean>(true);
+  const [message, setMessage] = React.useState<string>("");
   const contractAddress = "0xa94A7bBBe4723986268f158238d9c6b9d7a68Dc4";
   const contractInterface = new utils.Interface(abi);
 
@@ -29,29 +30,42 @@ const Home: NextPage = () => {
     const tx = await contract.mintBlack();
   };
 
-  if (chainId === 137) setIsPolygon(true);
+  // if (chainId === 137) setIsPolygon(true);
 
   console.log("chainId :", chainId);
 
   const connect = () => {
-    if (typeof window.ethereum !== "undefined") {
-      router.replace(
-        "https://metamask.app.link/dapp/wrappy-freemint.vercel.app/"
-      );
-    }
+    const agent = window.navigator.userAgent.toLowerCase();
 
-    activateBrowserWallet();
+    if (agent.indexOf("chrome") != -1) {
+      setMessage("ブラウザはchromeです。");
+    } else if (agent.indexOf("safari") != -1) {
+      setMessage("ブラウザはsafariです。");
+    } else if (agent.indexOf("metamask") != -1) {
+      setMessage("ブラウザはmetamaskです。");
+    }
+    {
+      console.log("");
+      // if () {
+      //   router.replace(
+      //     "https://metamask.app.link/dapp/wrappy-freemint.vercel.app/"
+      //   );
+    }
+    // activateBrowserWallet();
   };
 
   return (
-    <Template
-      activeWallet={connect}
-      account={account}
-      mintStatus={mintStatus}
-      mintBlack={mintBlack}
-      mintColorful={mintColorful}
-      isPolygon={isPolygon}
-    />
+    <>
+      <div>{message}</div>
+      <Template
+        activeWallet={connect}
+        account={account}
+        mintStatus={mintStatus}
+        mintBlack={mintBlack}
+        mintColorful={mintColorful}
+        isPolygon={isPolygon}
+      />
+    </>
   );
 };
 
