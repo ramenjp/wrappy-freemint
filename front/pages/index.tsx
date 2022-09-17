@@ -12,7 +12,7 @@ const Home: NextPage = () => {
   const { activateBrowserWallet, chainId, account, library } = useEthers();
   const [mintStatus, setMintStatus] = React.useState<boolean>(false);
   const [isPolygon, setIsPolygon] = React.useState<boolean>(true);
-  const contractAddress = "0x8793c3B17D8f48073370B88370314D18cea24d0b";
+  const contractAddress = "0xc04539E9e05ad94D16a6b9b7ff22A317B9b9F5Eb";
   const contractInterface = new utils.Interface(abi);
 
   // const useMintNftBlack = () => {
@@ -40,7 +40,7 @@ const Home: NextPage = () => {
   const mintColorful = async () => {
     const signer = library?.getSigner();
     const contract = await new ethers.Contract(contractAddress, abi, signer);
-    const tx = await contract.mintBlack();
+    const tx = await contract.mintColorful();
   };
 
   const getmintNftId1 = async () => {
