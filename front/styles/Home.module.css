@@ -98,3 +98,9 @@
   font-size: 16px;
   color: white;
 }
+
+.contentWrapper {
+  top: 100%;
+  background: url("../public/planet.png");
+  background-repeat: no-repeat;
+}

@@ -33,7 +33,7 @@ export const Template: React.FC<Props> = (props) => {
           </div>
         </div>
       ) : (
-        <>
+        <div className={styles.contentWrapper}>
           <div className={styles.title}>You can mint only 1 NFT</div>
           {chainId !== 137 || 80001 ? (
             <div className={styles.text}>Please connect Polygon Network</div>
@@ -62,7 +62,7 @@ export const Template: React.FC<Props> = (props) => {
               </button>
             </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
