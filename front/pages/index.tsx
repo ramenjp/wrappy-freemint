@@ -12,7 +12,7 @@ const Home: NextPage = () => {
   const { activateBrowserWallet, chainId, account, library } = useEthers();
   const [mintStatus, setMintStatus] = React.useState<boolean>(false);
   const [isPolygon, setIsPolygon] = React.useState<boolean>(true);
-  const contractAddress = "0x15831611c4Aa20AaDC8239a51b9c7518CfE7CC07";
+  const contractAddress = "0x8793c3B17D8f48073370B88370314D18cea24d0b";
   const contractInterface = new utils.Interface(abi);
 
   // const useMintNftBlack = () => {
