@@ -1,17 +1,15 @@
 import * as React from "react";
 import type { NextPage } from "next";
-import { useEthers, useCall } from "@usedapp/core";
+import { useEthers } from "@usedapp/core";
 import { Template } from "../templates";
-import { Contract } from "@ethersproject/contracts";
 import abi from "../abi.json";
 import { utils } from "ethers";
 import { ethers } from "ethers";
-import { redirect } from "next/dist/server/api-utils";
 
 const Home: NextPage = () => {
   const { activateBrowserWallet, account, library } = useEthers();
   const [mintStatus, setMintStatus] = React.useState<boolean>(false);
-  const contractAddress = "0xBf1Ac2Bb8D7AB67F8864C5A9B122E7C2917e2f85";
+  const contractAddress = "0x91c08B3c72B1A665F038b6629C3d683C81a6a4B2";
   const contractInterface = new utils.Interface(abi);
 
   const mintBlack = async () => {
