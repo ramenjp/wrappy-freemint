@@ -1,21 +1,35 @@
 import * as React from "react";
 import type { NextPage } from "next";
-import { useEthers } from "@usedapp/core";
+import { useEthers, useCall } from "@usedapp/core";
 import { Template } from "../templates";
 import { Contract } from "@ethersproject/contracts";
 import abi from "../abi.json";
 import { utils } from "ethers";
 import { ethers } from "ethers";
 import { redirect } from "next/dist/server/api-utils";
-import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
   const { activateBrowserWallet, chainId, account, library } = useEthers();
-  const router = useRouter();
   const [mintStatus, setMintStatus] = React.useState<boolean>(false);
   const [isPolygon, setIsPolygon] = React.useState<boolean>(true);
-  const contractAddress = "0xa94A7bBBe4723986268f158238d9c6b9d7a68Dc4";
+  const contractAddress = "0x15831611c4Aa20AaDC8239a51b9c7518CfE7CC07";
   const contractInterface = new utils.Interface(abi);
+
+  // const useMintNftBlack = () => {
+  //   const value = useCall(
+  //     contractAddress && {
+  //       contract: new Contract(contractAddress, contractInterface),
+  //       method: "mintNftId_1",
+  //       args: [],
+  //     }
+  //   );
+  //   // if (error) return undefined;
+  //   console.log("value :", value);
+  //   return value;
+  // };
+
+  // const mintNftId_1 = useMintNftBlack();
+  // console.log("mintNftId_1 :", mintNftId_1);
 
   const mintBlack = async () => {
     const signer = library?.getSigner();
@@ -29,9 +43,12 @@ const Home: NextPage = () => {
     const tx = await contract.mintBlack();
   };
 
-  // if (chainId === 137) setIsPolygon(true);
-
-  console.log("chainId :", chainId);
+  const getmintNftId1 = async () => {
+    const signer = library?.getSigner();
+    const contract = await new ethers.Contract(contractAddress, abi, signer);
+    const tx = await contract.mintNftId_1();
+    console.log("tx :", tx);
+  };
 
   const connect = () => {
     const agent = window.navigator.userAgent.toLowerCase();
@@ -47,19 +64,20 @@ const Home: NextPage = () => {
         console.log("please metamask install");
       }
     }
-
     activateBrowserWallet();
   };
 
   return (
-    <Template
-      account={account}
-      mintStatus={mintStatus}
-      isPolygon={isPolygon}
-      mintBlack={mintBlack}
-      mintColorful={mintColorful}
-      activeWallet={connect}
-    />
+    <>
+      <Template
+        account={account}
+        mintStatus={mintStatus}
+        isPolygon={isPolygon}
+        mintBlack={mintBlack}
+        mintColorful={mintColorful}
+        activeWallet={connect}
+      />
+    </>
   );
 };
 
