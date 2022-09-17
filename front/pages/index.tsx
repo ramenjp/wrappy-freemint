@@ -37,25 +37,21 @@ const Home: NextPage = () => {
 
   const connect = () => {
     const agent = window.navigator.userAgent.toLowerCase();
-
     if (navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
       setMessage2("スマホです");
-    }
-    if (agent.indexOf("chrome") != -1) {
-      setMessage("ブラウザはchromeです。");
-    } else if (agent.indexOf("safari") != -1) {
-      setMessage("ブラウザはsafariです。");
-    } else if (agent.indexOf("metamask") != -1) {
-      setMessage("ブラウザはmetamaskです。");
+      const { ethereum } = window;
+      if (ethereum && ethereum.isMetaMask) {
+        console.log("metamask installed!");
+        activateBrowserWallet();
+      } else {
+        window.open(
+          "https://metamask.app.link/dapp/wrappy-freemint.vercel.app/"
+        );
+        console.log("please metamask install");
+      }
     }
 
-    {
-      // if () {
-      //   router.replace(
-      //     "https://metamask.app.link/dapp/wrappy-freemint.vercel.app/"
-      //   );
-    }
-    // activateBrowserWallet();
+    activateBrowserWallet();
   };
 
   return (
