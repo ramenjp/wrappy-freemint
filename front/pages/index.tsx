@@ -15,6 +15,7 @@ const Home: NextPage = () => {
   const [mintStatus, setMintStatus] = React.useState<boolean>(false);
   const [isPolygon, setIsPolygon] = React.useState<boolean>(true);
   const [message, setMessage] = React.useState<string>("");
+  const [message2, setMessage2] = React.useState<string>("");
   const contractAddress = "0xa94A7bBBe4723986268f158238d9c6b9d7a68Dc4";
   const contractInterface = new utils.Interface(abi);
 
@@ -37,6 +38,9 @@ const Home: NextPage = () => {
   const connect = () => {
     const agent = window.navigator.userAgent.toLowerCase();
 
+    if (navigator.userAgent.match(/iPhone|Android.+Mobile/)) {
+      setMessage2("スマホです");
+    }
     if (agent.indexOf("chrome") != -1) {
       setMessage("ブラウザはchromeです。");
     } else if (agent.indexOf("safari") != -1) {
@@ -44,8 +48,8 @@ const Home: NextPage = () => {
     } else if (agent.indexOf("metamask") != -1) {
       setMessage("ブラウザはmetamaskです。");
     }
+
     {
-      console.log("");
       // if () {
       //   router.replace(
       //     "https://metamask.app.link/dapp/wrappy-freemint.vercel.app/"
@@ -57,6 +61,7 @@ const Home: NextPage = () => {
   return (
     <>
       <div>{message}</div>
+      <div>{message2}</div>
       <Template
         activeWallet={connect}
         account={account}
