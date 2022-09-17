@@ -2,6 +2,7 @@ import * as React from "react";
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Image from "next/image";
+import { useEthers } from "@usedapp/core";
 
 type Props = {
   activeWallet: () => void;
@@ -9,10 +10,12 @@ type Props = {
   mintBlack: () => void;
   account?: string;
   mintStatus: boolean;
-  isPolygon: boolean;
 };
 
 export const Template: React.FC<Props> = (props) => {
+  const { chainId } = useEthers();
+  console.log("chainId :", chainId);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -20,7 +23,6 @@ export const Template: React.FC<Props> = (props) => {
         <meta name="wrappy free mint" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div></div>
       {!props.account ? (
         <div>
           <div className={styles.main}>
@@ -33,7 +35,9 @@ export const Template: React.FC<Props> = (props) => {
       ) : (
         <>
           <div className={styles.title}>You can mint only 1 NFT</div>
-          <div className={styles.text}>Polygon Network</div>
+          {chainId !== 137 || 80001 ? (
+            <div className={styles.text}>Please connect Polygon Network</div>
+          ) : null}
           <div className={styles.images}>
             <div className={styles.item}>
               <Image
@@ -42,11 +46,9 @@ export const Template: React.FC<Props> = (props) => {
                 width={160}
                 height={160}
               />
-              {props.isPolygon && (
-                <button className={styles.mint} onClick={props.mintBlack}>
-                  Mint
-                </button>
-              )}
+              <button className={styles.mint} onClick={props.mintBlack}>
+                Mint
+              </button>
             </div>
             <div className={styles.item}>
               <Image
@@ -55,11 +57,9 @@ export const Template: React.FC<Props> = (props) => {
                 width={160}
                 height={160}
               />
-              {props.isPolygon && (
-                <button className={styles.mint} onClick={props.mintColorful}>
-                  Mint
-                </button>
-              )}
+              <button className={styles.mint} onClick={props.mintColorful}>
+                Mint
+              </button>
             </div>
           </div>
         </>

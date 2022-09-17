@@ -9,27 +9,10 @@ import { ethers } from "ethers";
 import { redirect } from "next/dist/server/api-utils";
 
 const Home: NextPage = () => {
-  const { activateBrowserWallet, chainId, account, library } = useEthers();
+  const { activateBrowserWallet, account, library } = useEthers();
   const [mintStatus, setMintStatus] = React.useState<boolean>(false);
-  const [isPolygon, setIsPolygon] = React.useState<boolean>(true);
-  const contractAddress = "0xc04539E9e05ad94D16a6b9b7ff22A317B9b9F5Eb";
+  const contractAddress = "0xBf1Ac2Bb8D7AB67F8864C5A9B122E7C2917e2f85";
   const contractInterface = new utils.Interface(abi);
-
-  // const useMintNftBlack = () => {
-  //   const value = useCall(
-  //     contractAddress && {
-  //       contract: new Contract(contractAddress, contractInterface),
-  //       method: "mintNftId_1",
-  //       args: [],
-  //     }
-  //   );
-  //   // if (error) return undefined;
-  //   console.log("value :", value);
-  //   return value;
-  // };
-
-  // const mintNftId_1 = useMintNftBlack();
-  // console.log("mintNftId_1 :", mintNftId_1);
 
   const mintBlack = async () => {
     const signer = library?.getSigner();
@@ -41,13 +24,6 @@ const Home: NextPage = () => {
     const signer = library?.getSigner();
     const contract = await new ethers.Contract(contractAddress, abi, signer);
     const tx = await contract.mintColorful();
-  };
-
-  const getmintNftId1 = async () => {
-    const signer = library?.getSigner();
-    const contract = await new ethers.Contract(contractAddress, abi, signer);
-    const tx = await contract.mintNftId_1();
-    console.log("tx :", tx);
   };
 
   const connect = () => {
@@ -72,7 +48,6 @@ const Home: NextPage = () => {
       <Template
         account={account}
         mintStatus={mintStatus}
-        isPolygon={isPolygon}
         mintBlack={mintBlack}
         mintColorful={mintColorful}
         activeWallet={connect}
